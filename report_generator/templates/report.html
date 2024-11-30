@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>Generated Report</title>
+  </head>
+  <body class="flex flex-col min-h-screen bg-gray-100 font-sans antialiased">
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4 text-white flex justify-between">
+      <div>
+        <h1 class="text-3xl font-bold">Resume Optimizer</h1>
+      </div>
+      <div>
+        <a href="#" class="text-white hover:underline">Logout</a>
+      </div>
+    </nav>
+
+    <br /><br />
+    <!-- Main -->
+    <div class="flex-grow container mx-auto mt-10 px-4 sm:px-0">
+      <div
+        class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md transition-transform transform hover:scale-105 flex flex-col"
+      >
+        <!-- Report display section -->
+        <div class="text-center">
+          <h2 class="text-2xl font-semibold mb-4">Generated Report</h2>
+          <div
+            id="reportContent"
+            class="bg-gray-100 p-4 rounded-lg text-left text-gray-700 whitespace-pre-wrap"
+          >
+            {{ report }}
+          </div>
+        </div>
+
+        <!-- Link to upload another file -->
+        <div class="mt-6 text-center">
+          <a
+            href="/upload_pdf/"
+            class="text-blue-600 hover:underline font-medium text-lg"
+          >
+            Upload Another PDF
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <footer class="text-center p-4 mt-6 text-black">
+      Powered by
+      <a
+        href="https://github.com/shersheryar"
+        class="font-semibold hover:underline"
+        >Sheryar Sher</a
+      >
+    </footer>
+  </body>
+</html>
