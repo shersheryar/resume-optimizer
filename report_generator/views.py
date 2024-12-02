@@ -4,6 +4,8 @@ import os
 from django.shortcuts import render
 from .forms import UploadPDFForm
 from .utils import process_pdf_and_generate_report  # Import your backend logic
+from reportlab.pdfgen import canvas
+from io import BytesIO
 
 
 def index(request):
@@ -43,3 +45,43 @@ def upload_pdf(request):
         form = UploadPDFForm()
 
     return render(request, 'upload.html', {'form': form})
+
+
+def download_report(request):
+    # Create a BytesIO buffer to hold the PDF data
+    buffer = BytesIO()
+
+    # Create a PDF using ReportLab
+    pdf = canvas.Canvas(buffer)
+    pdf.setTitle("Generated Report")
+
+    # Sample report content (replace this with actual report content)
+    report_content = [
+        "This is the generated report content.",
+        "Optimized for your needs!",
+        "",
+        "Thank you for using Resume Optimizer."
+    ]
+
+    # Write content to the PDF
+    pdf.setFont("Helvetica", 12)
+    y = 800  # Start position for the content
+    for line in report_content:
+        pdf.drawString(50, y, line)  # Draw each line at the specified position
+        y -= 20  # Move to the next line
+
+    # Finalize the PDF
+    pdf.showPage()
+    pdf.save()
+
+    # Get the PDF data from the buffer
+    buffer.seek(0)
+
+    # Create the HTTP response with the PDF
+    response = HttpResponse(
+        buffer,
+        content_type="application/pdf"
+    )
+    response['Content-Disposition'] = 'attachment; filename="Generated_Report.pdf"'
+
+    return response

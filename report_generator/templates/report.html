@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <link rel="stylesheet" href="style.css" />
     <title>Generated Report</title>
   </head>
@@ -35,8 +36,18 @@
           </div>
         </div>
 
-        <!-- Link to upload another file -->
-        <div class="mt-6 text-center">
+        <!-- Download and upload another file -->
+        <div class="mt-6 flex justify-between items-center">
+          <!-- Download button -->
+          <a
+            id="downloadReport"
+            href="/download_report/"
+            download="Generated_Report.pdf"
+            class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+          >
+            Download Report
+          </a>
+          <!-- Upload another file -->
           <a
             href="/upload_pdf/"
             class="text-blue-600 hover:underline font-medium text-lg"
@@ -55,5 +66,26 @@
         >Sheryar Sher</a
       >
     </footer>
+    <script>
+      document
+        .getElementById("downloadReport")
+        .addEventListener("click", () => {
+          // Import jsPDF
+          const { jsPDF } = window.jspdf;
+
+          // Create a new jsPDF instance
+          const pdf = new jsPDF();
+
+          // Get the content of the report
+          const reportContent =
+            document.getElementById("reportContent").innerText;
+
+          // Add content to the PDF
+          pdf.text(reportContent, 10, 10); // (text, x, y)
+
+          // Save the PDF
+          pdf.save("Generated_Report.pdf");
+        });
+    </script>
   </body>
 </html>
